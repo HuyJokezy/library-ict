@@ -43,7 +43,7 @@ function insert (obj, callback) {
   });
   let query = ''
   query = `INSERT INTO book (booknumber, title, publisher, isbn, classification, author) VALUES
-    ('${booknumber}', '${title}', '${publisher}', '${isbn}', '${classification}', '${author}'),`
+    ('${booknumber}', '${title}', '${publisher}', '${isbn}', '${classification}', '${author}')`
   client.connect();
   client.query(query, (err, res) => {
     if (err) {

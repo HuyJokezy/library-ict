@@ -49,10 +49,10 @@ function insert (obj, callback) {
   let query = ''
   if (studyperiod && studentid) {
     query = `INSERT INTO users (username, password, fullName, email, gender, contact, studyPeriod, studentId, role) VALUES
-    ('${username}', '${password}', '${email}', '${gender}', '${contact}', '${role}', '${studyperiod}', '${studentid}', '${role}'),`
+    ('${username}', '${password}', '${email}', '${gender}', '${contact}', '${role}', '${studyperiod}', '${studentid}', '${role}')`
   } else {
     query = `INSERT INTO users (username, password, fullName, email, gender, contact, studyPeriod, studentId, role) VALUES
-    ('${username}', '${password}', '${email}', '${gender}', '${contact}', '${role}', NULL, NULL, '${role}'),`
+    ('${username}', '${password}', '${email}', '${gender}', '${contact}', '${role}', NULL, NULL, '${role}')`
   }
   client.connect();
   client.query(query, (err, res) => {

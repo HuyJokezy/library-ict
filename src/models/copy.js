@@ -61,7 +61,7 @@ function insert (obj, callback) {
   });
   let query = ''
   query = `INSERT INTO copy (booknumber, copynumber, price, type) VALUES
-    ('${booknumber}', '${copynumber}', '${price}', '${type}'),`
+    ('${booknumber}', '${copynumber}', '${price}', '${type}')`
   client.connect();
   client.query(query, (err, res) => {
     if (err) {
