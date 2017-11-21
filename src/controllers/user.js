@@ -19,7 +19,24 @@ function getAll (req, res) {
   user.queryAll(callback)
 }
 
+function login (req, res) {
+  let { username, password } = req.body
+  let callback = function (jsonResponse) {
+    res.json(jsonResponse)
+  }
+  user.queryByUsernameAndPassword(username, password, callback)
+}
+
+function addNewUser (req, res) {
+  let callback = function (jsonResponse) {
+    res.json(jsonResponse)
+  }
+  user.insert(req.body, callback)
+}
+
 module.exports = {
   getByUsername,
-  getAll
+  getAll,
+  login,
+  addNewUser
 }
