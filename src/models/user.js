@@ -16,6 +16,7 @@ function queryByUsername (username, callback) {
   });
 }
 
+
 function queryAll (callback) {
   const { Client } = require('pg');
   const client = new Client({
