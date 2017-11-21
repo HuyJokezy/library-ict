@@ -8,7 +8,9 @@ function queryByUsername (username, callback) {
   client.query(`SELECT * FROM users WHERE username = '${ username }'`, (err, res) => {
     if (err) {
       console.log(err)
-      callback({})
+      callback({
+        error: "service down"
+      })
     } else {
       callback(res.rows[0])
     }
@@ -27,7 +29,9 @@ function queryAll (callback) {
   client.query(`SELECT * FROM users`, (err, res) => {
     if (err) {
       console.log(err)
-      callback({})
+      callback({
+        error: "service down"
+      })
     } else {
       callback(res.rows)
     }
@@ -36,18 +40,32 @@ function queryAll (callback) {
 }
 
 function insert (obj, callback) {
+  let { username, password, fullname, email, gender, contact, role, studyperiod, studentid } = obj
   const { Client } = require('pg');
   const client = new Client({
     connectionString: process.env.DATABASE_URL || 'postgres://jyamevtnefikev:c21391120be4cd964cfe0b8f1c5395f58da938b9c8ce7fec59fc6c88efa96330@ec2-54-235-80-137.compute-1.amazonaws.com:5432/d34otthgq56sk',
     ssl: true,
   });
+  let query = ''
+  if (studyperiod && studentid) {
+    query = `INSERT INTO users (username, password, fullName, email, gender, contact, studyPeriod, studentId, role) VALUES
+    ('${username}', '${password}', '${email}', '${gender}', '${contact}', '${role}', '${studyperiod}', '${studentid}', '${role}'),`
+  } else {
+    query = `INSERT INTO users (username, password, fullName, email, gender, contact, studyPeriod, studentId, role) VALUES
+    ('${username}', '${password}', '${email}', '${gender}', '${contact}', '${role}', NULL, NULL, '${role}'),`
+  }
   client.connect();
-  client.query(`SELECT * FROM users`, (err, res) => {
+  client.query(query, (err, res) => {
     if (err) {
       console.log(err)
-      callback({})
+      callback({
+        status: false,
+        error: "Invalid information"
+      })
     } else {
-      callback(res.rows)
+      callback({
+        status: true
+      })
     }
     client.end();
   });
@@ -63,9 +81,19 @@ function queryByUsernameAndPassword (username, password, callback) {
   client.query(`SELECT * FROM users WHERE username = '${ username }' and password = '${ password }'`, (err, res) => {
     if (err) {
       console.log(err)
-      callback({})
+      callback({
+        error: "service down"
+      })
     } else {
-      callback(res.rows)
+      if (res.rows.length === 0)
+        callback({
+          status: false
+        })
+      else
+        callback({
+          status: true,
+          role: res.rows[0].role
+        })
     }
     client.end();
   });

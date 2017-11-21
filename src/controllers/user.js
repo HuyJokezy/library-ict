@@ -28,10 +28,17 @@ function login (req, res) {
 }
 
 function addNewUser (req, res) {
+  let { username, password, fullname, email, gender, contact, role } = req.body
   let callback = function (jsonResponse) {
     res.json(jsonResponse)
   }
-  user.insert(req.body, callback)
+  if ( username && password && fullname && email && gender && contact && role) {
+    user.insert(req.body, callback)
+  } else {
+    res.json({
+      error: "Not enough information"
+    })
+  }
 }
 
 module.exports = {

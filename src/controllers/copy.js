@@ -24,7 +24,23 @@ function getAll (req, res) {
   }
 }
 
+function addNewCopy (req, res) {
+  let callback = function (jsonResponse) {
+    res.json(jsonResponse)
+  }
+  let { booknumber, copynumber, price, type } = req.body
+  if (bookNumber && copynumber && price && type) {
+    copy.insert(req.body, callback)
+  } else {
+    res.json({
+      status: false,
+      error: "Not enough information"
+    })
+  }
+}
+
 module.exports = {
   getByCopynumber,
-  getAll
+  getAll,
+  addNewCopy
 }

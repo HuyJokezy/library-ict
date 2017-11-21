@@ -19,7 +19,23 @@ function getAll (req, res) {
   book.queryAll(callback)
 }
 
+function addNewBook (req, res) {
+  let { booknumber, title, publisher, isbn, classification, author } = req.body
+  let callback = function (jsonResponse) {
+    res.json(jsonResponse)
+  }
+  if (booknumber && title && publisher && isbn && classification && author) {
+    book.insert(req.body, callback)
+  } else {
+    res.json({
+      error: "Not enough information"
+    })
+  }
+}
+
+
 module.exports = {
   getByBooknumber,
-  getAll
+  getAll,
+  addNewBook
 }
