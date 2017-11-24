@@ -102,5 +102,6 @@ function queryByUsernameAndPassword (username, password, callback) {
 module.exports = {
   queryByUsername,
   queryAll,
-  queryByUsernameAndPassword
+  queryByUsernameAndPassword,
+  insert
 }
