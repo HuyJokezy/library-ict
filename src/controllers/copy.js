@@ -29,7 +29,7 @@ function addNewCopy (req, res) {
     res.json(jsonResponse)
   }
   let { booknumber, copynumber, price, type } = req.body
-  if (bookNumber && copynumber && price && type) {
+  if (booknumber && copynumber && price && type) {
     copy.insert(req.body, callback)
   } else {
     res.json({

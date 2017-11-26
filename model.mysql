@@ -6,10 +6,10 @@ CREATE TABLE IF NOT EXISTS Book
     bookNumber INT NOT NULL,
     title VARCHAR(256) NOT NULL,
     publisher VARCHAR(256) NOT NULL,
-    ISBN VARCHAR(256) NOT NULL,
+    ISBN VARCHAR(11) NOT NULL,
     classification VARCHAR(256) NOT NULL,
     author VARCHAR(256) NOT NULL,
-    PRIMARY KEY(bookNumber)
+    CONSTRAINT bookNumber_pk PRIMARY KEY(bookNumber)
 );
 
 CREATE TABLE IF NOT EXISTS Author

@@ -60,8 +60,8 @@ function insert (obj, callback) {
     ssl: true,
   });
   let query = ''
-  query = `INSERT INTO copy (booknumber, copynumber, price, type) VALUES
-    ('${booknumber}', '${copynumber}', '${price}', '${type}')`
+  query = `INSERT INTO copy (copyNumber, bookNumber, price, type) VALUES
+    ('${copynumber}', '${booknumber}', '${price}', '${type}')`
   client.connect();
   client.query(query, (err, res) => {
     if (err) {
@@ -72,7 +72,8 @@ function insert (obj, callback) {
       })
     } else {
       callback({
-        status: true
+        status: true,
+        copyNumber: copynumber
       })
     }
     client.end();

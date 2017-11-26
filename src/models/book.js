@@ -42,7 +42,7 @@ function insert (obj, callback) {
     ssl: true,
   });
   let query = ''
-  query = `INSERT INTO book (booknumber, title, publisher, isbn, classification, author) VALUES
+  query = `INSERT INTO book (bookNumber, title, publisher, ISBN, classification, author) VALUES
     ('${booknumber}', '${title}', '${publisher}', '${isbn}', '${classification}', '${author}')`
   client.connect();
   client.query(query, (err, res) => {
@@ -54,7 +54,8 @@ function insert (obj, callback) {
       })
     } else {
       callback({
-        status: true
+        status: true,
+        bookNumber: booknumber
       })
     }
     client.end();
