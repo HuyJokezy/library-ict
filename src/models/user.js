@@ -64,7 +64,8 @@ function insert (obj, callback) {
       })
     } else {
       callback({
-        status: true
+        status: true,
+        username: username
       })
     }
     client.end();
