@@ -33,7 +33,8 @@ function insert (obj, callback) {
         username,
         copynumber,
         borrowDate,
-        returnDate
+        returnDate,
+        current: 'REGISTERED'
       })
     }
     client.end();
