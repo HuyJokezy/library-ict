@@ -80,9 +80,30 @@ function insert (obj, callback) {
   });
 }
 
+function updateType (copynumber, type) {
+  let { booknumber, copynumber, price, type } = obj
+  const { Client } = require('pg');
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL || 'postgres://jyamevtnefikev:c21391120be4cd964cfe0b8f1c5395f58da938b9c8ce7fec59fc6c88efa96330@ec2-54-235-80-137.compute-1.amazonaws.com:5432/d34otthgq56sk',
+    ssl: true,
+  });
+  let query = ''
+  query = `UPDATE copy SET type = '${type}' WHERE copyNumber = '${copynumber}'`
+  client.connect();
+  client.query(query, (err, res) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(res)
+    }
+    client.end();
+  });
+}
+
 module.exports = {
   queryByCopynumber,
   queryAll,
   queryByBooknumber,
-  insert
+  insert,
+  updateType
 }

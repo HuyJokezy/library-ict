@@ -13,10 +13,12 @@ app.use(bodyParser.json())
 const book = require('./src/route/book')
 const user  = require('./src/route/user')
 const copy = require('./src/route/copy')
+const copy = require('./src/route/borrow')
 
 app.use('/book', book)
 app.use('/user', user)
 app.use('/copy', copy)
+app.use('/borrow', borrow)
 
 app.use('*', (req, res) => {
   res.json({

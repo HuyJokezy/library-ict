@@ -21,11 +21,13 @@ function run (index) {
 
 
 var query = [
-`CREATE TYPE copyType AS ENUM ('REFERENCE', 'BORROWABLE');`,
+`CREATE TYPE copyType AS ENUM ('REFERENCE', 'BORROWABLE', 'LENT');`,
 
 `CREATE TYPE genderType AS ENUM ('F', 'M');`,
 
 `CREATE TYPE roleType AS ENUM ('LIBRARIAN', 'CUSTOMER');`,
+
+`CREATE TYPE currentBorrow AS ENUM ('REGISTERED', 'ACTIVE', 'RETURNED', 'OVERDUE');`,
 
 `CREATE TABLE book (
 bookNumber varchar(6) NOT NULL PRIMARY KEY,
@@ -61,7 +63,9 @@ role roleType NOT NULL
 borrowId SERIAL NOT NULL PRIMARY KEY,
 username varchar(30) NOT NULL REFERENCES users (username) ON DELETE CASCADE,
 copyNumber varchar(8) NOT NULL REFERENCES copy (copyNumber) ON DELETE CASCADE,
-date date NOT NULL
+current currentBorrow NOT NULL,
+borrowDate date NOT NULL,
+returnDate date NOT NULL
 );`,
 
 `INSERT INTO book (bookNumber, title, publisher, ISBN, classification, author) VALUES
@@ -78,4 +82,4 @@ date date NOT NULL
 
 ]
 
-run(4)
+run(0)
